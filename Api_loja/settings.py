@@ -43,6 +43,9 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
+MEDIA_URL =  '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 CORS_ORIGIN_ALLOW_ALL =  True
 
 ROOT_URLCONF = 'Api_loja.urls'

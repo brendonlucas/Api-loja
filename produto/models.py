@@ -7,6 +7,7 @@ class Produto(models.Model):
     preco = models.FloatField()
     quantidade = models.IntegerField()
     excluido = models.BooleanField(default=0)
+    file = models.FileField(blank=False, null=True)
 
 
 

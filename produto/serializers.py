@@ -4,11 +4,10 @@ from produto.models import Produto
 
 
 class ProdutoSerializer(serializers.ModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name="Produto-detail")
 
     class Meta:
         model = Produto
-        fields = ('url', 'pk', 'name', 'preco', 'quantidade')
+        fields = ('pk', 'name', 'preco', 'quantidade', 'file')
 
 
 class ProdutoDetailSerializer(serializers.ModelSerializer):
