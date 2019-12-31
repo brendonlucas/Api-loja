@@ -19,11 +19,10 @@ class FuncionarioSerializer(serializers.ModelSerializer):
 
 class CompraSerializer(serializers.ModelSerializer):
     produto = ProdutoSerializer()
-    funcionario = FuncionarioSerializer()
 
     class Meta:
         model = Compra
-        fields = ('id', 'produto', 'funcionario', 'data_compra', 'quantidade', 'valor_total')
+        fields = ('id', 'produto', 'data_compra', 'quantidade', 'valor_total')
 
 
 class FazerCompraSerializer(serializers.ModelSerializer):

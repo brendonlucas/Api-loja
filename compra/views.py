@@ -35,7 +35,7 @@ class ProdutoCompra(generics.GenericAPIView):
         if qtd <= produto.quantidade:
             valor_total = produto.preco * qtd
             produto.quantidade = produto.quantidade - qtd
-            compra = Compra(produto=produto, funcionario=Funcionario.objects.get(id=1), quantidade=qtd,
+            compra = Compra(produto=produto, quantidade=qtd,
                             valor_total=valor_total)
             produto.save()
             compra.save()
