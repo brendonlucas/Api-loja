@@ -3,6 +3,7 @@ from django.shortcuts import render
 from rest_framework import generics, viewsets, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import filters
 
 from produto.models import Produto
 from produto.serializers import *
@@ -12,6 +13,8 @@ class ProdutoList(generics.ListCreateAPIView):
     queryset = Produto.objects.all().exclude(excluido=1)
     serializer_class = ProdutoSerializer
     name = 'Produto-list'
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
 
 
 class ProdutoDetail(APIView):
