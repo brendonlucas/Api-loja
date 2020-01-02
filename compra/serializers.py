@@ -8,7 +8,7 @@ from usuario.models import Funcionario
 class ProdutoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produto
-        fields = ('id', 'name', 'preco', 'quantidade')
+        fields = ('id', 'name', 'preco', 'quantidade', 'file')
 
 
 class FuncionarioSerializer(serializers.ModelSerializer):
