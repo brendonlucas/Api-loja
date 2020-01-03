@@ -7,10 +7,10 @@ class ProdutoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Produto
-        fields = ('pk', 'name', 'preco', 'quantidade', 'file')
+        fields = ('pk', 'name', 'preco', 'quantidade', 'file', 'descricao')
 
 
 class ProdutoDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produto
-        fields = ('pk', 'name', 'preco', 'quantidade')
+        fields = ('pk', 'name', 'preco', 'quantidade', 'descricao')

@@ -14,6 +14,7 @@ class FuncionarioList(generics.ListCreateAPIView):
     queryset = Funcionario.objects.all()
     serializer_class = FuncionarioSerializer
     name = 'Funcionario-list'
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class FuncionarioDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -27,22 +28,23 @@ class FuncinarioAdd(generics.ListCreateAPIView):
     queryset = Funcionario.objects.all()
     serializer_class = AddFuncionarioSerializer
     name = 'Add-Funcionario'
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
-        try:
-            user = User.objects.get(username=request.data['username'])
-            if user:
-                return Response({'error': 'usuario ja existe'}, status=status.HTTP_400_BAD_REQUEST)
-        except User.DoesNotExist:
+        if request.user.is_authenticated:
+            try:
+                user = User.objects.get(username=request.data['username'])
+                if user:
+                    return Response({'error': 'usuario ja existe'}, status=status.HTTP_400_BAD_REQUEST)
+            except User.DoesNotExist:
 
-            user = User.objects.create_user(username=request.data['username'], password=request.data['password'],
-                                            email=request.data['email'])
-            funcionario = Funcionario(name=request.data['name'], cpf=request.data['cpf'],
-                                      telefone=request.data['telefone'],
-                                      funcionario_complement=user)
-            funcionario.save()
-            return Response(status=status.HTTP_201_CREATED)
+                user = User.objects.create_user(username=request.data['username'], password=request.data['password'],
+                                                email=request.data['email'])
+                funcionario = Funcionario(name=request.data['name'], cpf=request.data['cpf'],
+                                          telefone=request.data['telefone'],
+                                          funcionario_complement=user)
+                funcionario.save()
+                return Response(status=status.HTTP_201_CREATED)
 
 
 class CustomAuthToken(ObtainAuthToken):

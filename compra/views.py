@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 
 from compra.models import Compra
@@ -11,18 +11,21 @@ class CompraList(generics.ListCreateAPIView):
     queryset = Compra.objects.all()
     serializer_class = CompraSerializer
     name = 'Compra-list'
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class CompraDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Compra.objects.all()
     serializer_class = CompraSerializer
     name = 'Compra-detail'
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class ProdutoCompra(generics.GenericAPIView):
     queryset = Compra.objects.all()
     serializer_class = FazerCompraSerializer
     name = 'Produto-Compra'
+    permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, id_produto, *args, **kwargs):
         # if request.user.is_authenticated:
